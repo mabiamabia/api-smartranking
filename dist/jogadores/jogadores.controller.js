@@ -8,20 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JogadoresController = void 0;
 const common_1 = require("@nestjs/common");
+const criar_jogador_dto_1 = require("./dtos/criar-jogador.dto");
 let JogadoresController = class JogadoresController {
-    async criarAtualizarJogador() {
-        return JSON.stringify({
-            "nome": "Diego"
-        });
+    async criarAtualizarJogador(criarJogadorDto) {
+        const { email } = criarJogadorDto;
+        return JSON.stringify(`{
+            "email": ${email}
+        }`);
     }
 };
 __decorate([
     (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [criar_jogador_dto_1.CriarJogadorDto]),
     __metadata("design:returntype", Promise)
 ], JogadoresController.prototype, "criarAtualizarJogador", null);
 JogadoresController = __decorate([
