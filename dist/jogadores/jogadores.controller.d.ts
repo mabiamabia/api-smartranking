@@ -1,4 +1,7 @@
 import { CriarJogadorDto } from './dtos/criar-jogador.dto';
+import { JogadoresService } from './jogadores.service';
 export declare class JogadoresController {
-    criarAtualizarJogador(criarJogadorDto: CriarJogadorDto): Promise<string>;
+    private readonly jogadoresService;
+    constructor(jogadoresService: JogadoresService);
+    criarAtualizarJogador(criarJogadorDto: CriarJogadorDto): Promise<void>;
 }

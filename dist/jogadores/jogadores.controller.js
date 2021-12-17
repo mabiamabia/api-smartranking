@@ -15,12 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.JogadoresController = void 0;
 const common_1 = require("@nestjs/common");
 const criar_jogador_dto_1 = require("./dtos/criar-jogador.dto");
+const jogadores_service_1 = require("./jogadores.service");
 let JogadoresController = class JogadoresController {
+    constructor(jogadoresService) {
+        this.jogadoresService = jogadoresService;
+    }
     async criarAtualizarJogador(criarJogadorDto) {
-        const { email } = criarJogadorDto;
-        return JSON.stringify(`{
-            "email": ${email}
-        }`);
+        await this.jogadoresService.criarAtualizarJogador(criarJogadorDto);
     }
 };
 __decorate([
@@ -31,7 +32,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], JogadoresController.prototype, "criarAtualizarJogador", null);
 JogadoresController = __decorate([
-    (0, common_1.Controller)('api/V1/jogadores')
+    (0, common_1.Controller)('api/V1/jogadores'),
+    __metadata("design:paramtypes", [jogadores_service_1.JogadoresService])
 ], JogadoresController);
 exports.JogadoresController = JogadoresController;
 //# sourceMappingURL=jogadores.controller.js.map
