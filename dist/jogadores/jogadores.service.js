@@ -9,7 +9,7 @@ var JogadoresService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JogadoresService = void 0;
 const common_1 = require("@nestjs/common");
-const uuid = require("uuid/v1");
+const uuid_1 = require("uuid");
 let JogadoresService = JogadoresService_1 = class JogadoresService {
     constructor() {
         this.jogadores = [];
@@ -22,7 +22,7 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
     criar(criaJogadorDto) {
         const { nome, telefoneCelular, email } = criaJogadorDto;
         const jogador = {
-            _id: uuid(),
+            _id: (0, uuid_1.v4)(),
             nome,
             telefoneCelular,
             email,
