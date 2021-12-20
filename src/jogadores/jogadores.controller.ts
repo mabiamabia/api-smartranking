@@ -10,7 +10,7 @@ export class JogadoresController {
 
     @Post()
     async criarAtualizarJogador(
-        @Body() criarJogadorDto: CriarJogadorDto) {
-            await this.jogadoresService.criarAtualizarJogador(criarJogadorDto)
+        @Body() criaJogadorDto: CriarJogadorDto) {
+            await this.jogadoresService.criarAtualizarJogador(criaJogadorDto)
     }
 }

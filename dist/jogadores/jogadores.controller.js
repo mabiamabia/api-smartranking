@@ -20,8 +20,8 @@ let JogadoresController = class JogadoresController {
     constructor(jogadoresService) {
         this.jogadoresService = jogadoresService;
     }
-    async criarAtualizarJogador(criarJogadorDto) {
-        await this.jogadoresService.criarAtualizarJogador(criarJogadorDto);
+    async criarAtualizarJogador(criaJogadorDto) {
+        await this.jogadoresService.criarAtualizarJogador(criaJogadorDto);
     }
 };
 __decorate([

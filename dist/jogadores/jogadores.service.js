@@ -16,7 +16,6 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
         this.logger = new common_1.Logger(JogadoresService_1.name);
     }
     async criarAtualizarJogador(criaJogadorDto) {
-        this.logger.log(`criaJogadorDto: ${criaJogadorDto}`);
         await this.criar(criaJogadorDto);
     }
     criar(criaJogadorDto) {
@@ -30,6 +29,7 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
             posicaoRanking: 1,
             urlFotoJogador: 'www.google.com.br/foto123.jpg'
         };
+        this.logger.log(`criaJogadorDto: ${JSON.stringify(jogador)}`);
         this.jogadores.push(jogador);
     }
 };
