@@ -23,6 +23,9 @@ let JogadoresController = class JogadoresController {
     async criarAtualizarJogador(criaJogadorDto) {
         await this.jogadoresService.criarAtualizarJogador(criaJogadorDto);
     }
+    async consultarJogadores() {
+        return this.jogadoresService.consultarTodosJogadores();
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -31,6 +34,12 @@ __decorate([
     __metadata("design:paramtypes", [criar_jogador_dto_1.CriarJogadorDto]),
     __metadata("design:returntype", Promise)
 ], JogadoresController.prototype, "criarAtualizarJogador", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], JogadoresController.prototype, "consultarJogadores", null);
 JogadoresController = __decorate([
     (0, common_1.Controller)('api/V1/jogadores'),
     __metadata("design:paramtypes", [jogadores_service_1.JogadoresService])

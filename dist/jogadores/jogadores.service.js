@@ -18,6 +18,9 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
     async criarAtualizarJogador(criaJogadorDto) {
         await this.criar(criaJogadorDto);
     }
+    async consultarTodosJogadores() {
+        return await this.jogadores;
+    }
     criar(criaJogadorDto) {
         const { nome, telefoneCelular, email } = criaJogadorDto;
         const jogador = {
