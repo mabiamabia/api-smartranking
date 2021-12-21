@@ -17,12 +17,17 @@ export class JogadoresController {
 
     @Get() 
     async consultarJogadores(
-
-        @Query('email') email: string): Promise<Jogador[]> {
+        @Query('email') email: string): Promise<Jogador[] | Jogador> {
             if (email) {
-                return this.jogadoresService.consultarJogadoresPeloEmail(email);
+                return await this.jogadoresService.consultarJogadoresPeloEmail(email);
             } else {
-                return this.jogadoresService.consultarTodosJogadores();
+                return await this.jogadoresService.consultarTodosJogadores();
             }
     }
+
+    async deletarJogador(
+        @Query('email') email:string): Promise<void> {
+            this.jogadoresService.deletarJogador(email)
+    }
+
 }
