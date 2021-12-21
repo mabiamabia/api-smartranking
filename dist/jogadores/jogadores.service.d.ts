@@ -6,4 +6,5 @@ export declare class JogadoresService {
     criarAtualizarJogador(criaJogadorDto: CriarJogadorDto): Promise<void>;
     consultarTodosJogadores(): Promise<Jogador[]>;
     private criar;
+    private atualizar;
 }

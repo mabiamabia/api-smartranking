@@ -16,7 +16,14 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
         this.logger = new common_1.Logger(JogadoresService_1.name);
     }
     async criarAtualizarJogador(criaJogadorDto) {
-        await this.criar(criaJogadorDto);
+        const { email } = criaJogadorDto;
+        const jogadorEncontrado = await this.jogadores.find(jogador => jogador.email === email);
+        if (jogadorEncontrado) {
+            this.atualizar(jogadorEncontrado, criaJogadorDto);
+        }
+        else {
+            this.criar(criaJogadorDto);
+        }
     }
     async consultarTodosJogadores() {
         return await this.jogadores;
@@ -34,6 +41,10 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
         };
         this.logger.log(`criaJogadorDto: ${JSON.stringify(jogador)}`);
         this.jogadores.push(jogador);
+    }
+    atualizar(jogadorEncontrado, criarJogadorDto) {
+        const { nome } = criarJogadorDto;
+        jogadorEncontrado.nome = nome;
     }
 };
 JogadoresService = JogadoresService_1 = __decorate([
