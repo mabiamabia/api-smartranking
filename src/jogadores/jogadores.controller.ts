@@ -30,5 +30,4 @@ export class JogadoresController {
         @Query('email') email:string): Promise<void> {
             this.jogadoresService.deletarJogador(email)
     }
-
 }
