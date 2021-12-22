@@ -12,7 +12,6 @@ export class JogadoresService {
     async criarAtualizarJogador(criaJogadorDto: CriarJogadorDto): Promise<void>{
 
         const { email } = criaJogadorDto
-
         const jogadorEncontrado = this.jogadores.find(jogador => jogador.email === email)
 
         if(jogadorEncontrado) {
@@ -43,7 +42,6 @@ export class JogadoresService {
     private criar(criaJogadorDto: CriarJogadorDto): void {
 
         const { nome, telefoneCelular, email } = criaJogadorDto
-        
         const jogador: Jogador = {
             _id: uuidv4(),
             nome,
