@@ -7,5 +7,4 @@ export interface Jogador {
     ranking: string;
     posicaoRanking: number;
     urlFotoJogador:string;
-
 }
