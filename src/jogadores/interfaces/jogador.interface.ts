@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+import { Document } from 'mongoose'
+
 export interface Jogador {
     readonly _id: string;
     readonly telefoneCelular: string;
