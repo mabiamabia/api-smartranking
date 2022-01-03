@@ -17,7 +17,7 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
     }
     async criarAtualizarJogador(criaJogadorDto) {
         const { email } = criaJogadorDto;
-        const jogadorEncontrado = await this.jogadores.find(jogador => jogador.email === email);
+        const jogadorEncontrado = this.jogadores.find(jogador => jogador.email === email);
         if (jogadorEncontrado) {
             this.atualizar(jogadorEncontrado, criaJogadorDto);
         }
@@ -29,7 +29,7 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
         return await this.jogadores;
     }
     async consultarJogadoresPeloEmail(email) {
-        const jogadorEncontrado = await this.jogadores.find(jogador => jogador.email === email);
+        const jogadorEncontrado = this.jogadores.find(jogador => jogador.email === email);
         if (!jogadorEncontrado) {
             throw new common_1.NotFoundException(`Jogador com email ${email} não encontrado`);
         }
@@ -38,7 +38,7 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
         }
     }
     async deletarJogador(email) {
-        const jogadorEncontrado = await this.jogadores.find(jogador => jogador.email === email);
+        const jogadorEncontrado = this.jogadores.find(jogador => jogador.email === email);
         this.jogadores = this.jogadores.filter(jogador => jogador.email !== jogadorEncontrado.email);
     }
     criar(criaJogadorDto) {

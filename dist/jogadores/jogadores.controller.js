@@ -50,6 +50,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], JogadoresController.prototype, "consultarJogadores", null);
 __decorate([
+    (0, common_1.Delete)(),
     __param(0, (0, common_1.Query)('email')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
