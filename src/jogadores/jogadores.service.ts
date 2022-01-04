@@ -3,21 +3,28 @@ import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CriarJogadorDto } from './dtos/criar-jogador.dto';
 import { Jogador } from './interfaces/jogador.interface';
 import {v4 as uuidv4 } from 'uuid' ;
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 @Injectable()
 export class JogadoresService {
 
     private jogadores: Jogador[] = [];
+
+    constructor(@InjectModel('Jogador') private readonly jogadorModel: Model<Jogador>){}
+
     private readonly logger = new Logger(JogadoresService.name)
 
     async criarAtualizarJogador(criaJogadorDto: CriarJogadorDto): Promise<void>{
 
         const { email } = criaJogadorDto
-        const jogadorEncontrado = this.jogadores.find(jogador => jogador.email === email)
+/*      const jogadorEncontrado = this.jogadores.find(jogador => jogador.email === email)
+ */
+        const jogadorEncontrado = await this.jogadorModel.findOne({email}).exec();
 
         if(jogadorEncontrado) {
-            this.atualizar(jogadorEncontrado, criaJogadorDto)
+            await this.atualizar(jogadorEncontrado, criaJogadorDto)
         } else {
-            this.criar(criaJogadorDto)
+            await this.criar(criaJogadorDto)
         }        
     }
 
@@ -41,7 +48,9 @@ export class JogadoresService {
 
     private criar(criaJogadorDto: CriarJogadorDto): void {
 
-        const { nome, telefoneCelular, email } = criaJogadorDto
+        const jogadorCriado = new this.jogadorModel(criaJogadorDto)
+
+        /* const { nome, telefoneCelular, email } = criaJogadorDto
         const jogador: Jogador = {
             _id: uuidv4(),
             nome,
@@ -52,7 +61,7 @@ export class JogadoresService {
             urlFotoJogador: 'www.google.com.br/foto123.jpg'
         }
         this.logger.log(`criaJogadorDto: ${JSON.stringify(jogador) }`)
-        this.jogadores.push(jogador)
+        this.jogadores.push(jogador) */
     }
 
     private atualizar(jogadorEncontrado: Jogador, criarJogadorDto: CriarJogadorDto): void {
