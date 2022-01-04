@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
 import { Document } from 'mongoose'
 
 export interface Jogador {
-    readonly _id: string;
     readonly telefoneCelular: string;
     readonly email: string;
     nome: string;
