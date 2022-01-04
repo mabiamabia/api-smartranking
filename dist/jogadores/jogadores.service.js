@@ -49,12 +49,12 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
         const jogadorEncontrado = this.jogadores.find(jogador => jogador.email === email);
         this.jogadores = this.jogadores.filter(jogador => jogador.email !== jogadorEncontrado.email);
     }
-    criar(criaJogadorDto) {
+    async criar(criaJogadorDto) {
         const jogadorCriado = new this.jogadorModel(criaJogadorDto);
+        return await jogadorCriado.save();
     }
-    atualizar(jogadorEncontrado, criarJogadorDto) {
-        const { nome } = criarJogadorDto;
-        jogadorEncontrado.nome = nome;
+    async atualizar(criarJogadorDto) {
+        return await this.jogadorModel.findOneAndUpdate({ email: criarJogadorDto.email }, { $set: criarJogadorDto }).exec();
     }
 };
 JogadoresService = JogadoresService_1 = __decorate([
