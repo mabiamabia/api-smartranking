@@ -19,7 +19,7 @@ export class JogadoresController {
     async consultarJogadores(
         @Query('email') email: string): Promise<Jogador[] | Jogador> {
             if (email) {
-                return await this.jogadoresService.consultarJogadoresPeloEmail(email);
+                return await this.jogadoresService.consultarJogadorPeloEmail(email);
             } else {
                 return await this.jogadoresService.consultarTodosJogadores();
             }

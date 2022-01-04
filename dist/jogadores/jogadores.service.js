@@ -20,24 +20,23 @@ const mongoose_2 = require("mongoose");
 let JogadoresService = JogadoresService_1 = class JogadoresService {
     constructor(jogadorModel) {
         this.jogadorModel = jogadorModel;
-        this.jogadores = [];
         this.logger = new common_1.Logger(JogadoresService_1.name);
     }
     async criarAtualizarJogador(criaJogadorDto) {
         const { email } = criaJogadorDto;
         const jogadorEncontrado = await this.jogadorModel.findOne({ email }).exec();
         if (jogadorEncontrado) {
-            await this.atualizar(jogadorEncontrado, criaJogadorDto);
+            await this.atualizar(criaJogadorDto);
         }
         else {
             await this.criar(criaJogadorDto);
         }
     }
     async consultarTodosJogadores() {
-        return await this.jogadores;
+        return await this.jogadorModel.find().exec();
     }
-    async consultarJogadoresPeloEmail(email) {
-        const jogadorEncontrado = this.jogadores.find(jogador => jogador.email === email);
+    async consultarJogadorPeloEmail(email) {
+        const jogadorEncontrado = await this.jogadorModel.findOne({ email }).exec();
         if (!jogadorEncontrado) {
             throw new common_1.NotFoundException(`Jogador com email ${email} não encontrado`);
         }
@@ -46,8 +45,7 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
         }
     }
     async deletarJogador(email) {
-        const jogadorEncontrado = this.jogadores.find(jogador => jogador.email === email);
-        this.jogadores = this.jogadores.filter(jogador => jogador.email !== jogadorEncontrado.email);
+        return await this.jogadorModel.remove({ email }).exec();
     }
     async criar(criaJogadorDto) {
         const jogadorCriado = new this.jogadorModel(criaJogadorDto);

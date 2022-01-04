@@ -5,8 +5,8 @@ import { JogadoresModule } from './jogadores/jogadores.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://priscila:peresila1@cluster0.5ogwc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-    { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }
+    MongooseModule.forRoot('mongodb+srv://priscila:peresila1@cluster0.5ogwc.mongodb.net/smartranking?retryWrites=true&w=majority',
+    { useNewUrlParser: true}
     ),
     JogadoresModule],
   controllers: [],

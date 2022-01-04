@@ -15,7 +15,7 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot('mongodb+srv://priscila:peresila1@cluster0.5ogwc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }),
+            mongoose_1.MongooseModule.forRoot('mongodb+srv://priscila:peresila1@cluster0.5ogwc.mongodb.net/smartranking?retryWrites=true&w=majority', { useNewUrlParser: true }),
             jogadores_module_1.JogadoresModule
         ],
         controllers: [],

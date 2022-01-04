@@ -25,7 +25,7 @@ let JogadoresController = class JogadoresController {
     }
     async consultarJogadores(email) {
         if (email) {
-            return await this.jogadoresService.consultarJogadoresPeloEmail(email);
+            return await this.jogadoresService.consultarJogadorPeloEmail(email);
         }
         else {
             return await this.jogadoresService.consultarTodosJogadores();
