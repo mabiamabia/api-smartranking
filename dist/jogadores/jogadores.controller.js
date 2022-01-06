@@ -46,7 +46,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], JogadoresController.prototype, "criarJogador", null);
 __decorate([
-    Put('/:_id'),
+    (0, common_1.Put)('/:_id'),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Param)('_id', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),

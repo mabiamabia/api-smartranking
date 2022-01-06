@@ -8,6 +8,6 @@ export declare class JogadoresService {
     criarJogador(criaJogadorDto: CriarJogadorDto): Promise<Jogador>;
     atualizarJogador(_id: string, criarJogadorDto: CriarJogadorDto): Promise<void>;
     consultarTodosJogadores(): Promise<Jogador[]>;
-    consultarJogadorPeloEmail(email: string): Promise<Jogador>;
-    deletarJogador(email: any): Promise<any>;
+    consultarJogadorPeloId(_id: string): Promise<Jogador>;
+    deletarJogador(_id: any): Promise<any>;
 }

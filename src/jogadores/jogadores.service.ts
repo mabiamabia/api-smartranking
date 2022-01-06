@@ -42,17 +42,23 @@ export class JogadoresService {
 
             /*------------------------------- aqui --------------------------*/
 
-    async consultarJogadorPeloEmail(email: string): Promise<Jogador> {
-        const jogadorEncontrado = await this.jogadorModel.findOne({email}).exec()
+    async consultarJogadorPeloId(_id: string): Promise<Jogador> {
+        const jogadorEncontrado = await this.jogadorModel.findOne({_id}).exec()
+        
         if (!jogadorEncontrado) {
-            throw new NotFoundException(`Jogador com email ${email} não encontrado`)
-        } else {
+            throw new NotFoundException(`Jogador com id ${_id} não encontrado`)
+        } 
             return jogadorEncontrado
-        }
     }
     
-    async deletarJogador(email): Promise<any> {
-        return await this.jogadorModel.deleteOne({email}).exec()
-}
+    async deletarJogador(_id): Promise<any> {
 
+        const jogadorEncontrado = await this.jogadorModel.findOne({_id}).exec()
+        
+        if (!jogadorEncontrado) {
+            throw new NotFoundException(`Jogador com id ${_id} não encontrado`)
+        } 
+
+        return await this.jogadorModel.deleteOne({_id}).exec()
+    }
 }

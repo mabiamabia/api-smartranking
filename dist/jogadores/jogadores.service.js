@@ -41,17 +41,19 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
     async consultarTodosJogadores() {
         return await this.jogadorModel.find().exec();
     }
-    async consultarJogadorPeloEmail(email) {
-        const jogadorEncontrado = await this.jogadorModel.findOne({ email }).exec();
+    async consultarJogadorPeloId(_id) {
+        const jogadorEncontrado = await this.jogadorModel.findOne({ _id }).exec();
         if (!jogadorEncontrado) {
-            throw new common_1.NotFoundException(`Jogador com email ${email} não encontrado`);
+            throw new common_1.NotFoundException(`Jogador com id ${_id} não encontrado`);
         }
-        else {
-            return jogadorEncontrado;
-        }
+        return jogadorEncontrado;
     }
-    async deletarJogador(email) {
-        return await this.jogadorModel.deleteOne({ email }).exec();
+    async deletarJogador(_id) {
+        const jogadorEncontrado = await this.jogadorModel.findOne({ _id }).exec();
+        if (!jogadorEncontrado) {
+            throw new common_1.NotFoundException(`Jogador com id ${_id} não encontrado`);
+        }
+        return await this.jogadorModel.deleteOne({ _id }).exec();
     }
 };
 JogadoresService = JogadoresService_1 = __decorate([
