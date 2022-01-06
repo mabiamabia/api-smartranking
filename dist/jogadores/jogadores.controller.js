@@ -21,17 +21,20 @@ let JogadoresController = class JogadoresController {
     constructor(jogadoresService) {
         this.jogadoresService = jogadoresService;
     }
-    async criarAtualizarJogador(criaJogadorDto) {
-        await this.jogadoresService.criarAtualizarJogador(criaJogadorDto);
+    async criarJogador(criaJogadorDto) {
+        await this.jogadoresService.criarJogador(criaJogadorDto);
+    }
+    async atualizarJogador(criaJogadorDto, _id) {
+        await this.jogadoresService.atualizarJogador(_id, criaJogadorDto);
     }
     async consultarJogadores() {
         return await this.jogadoresService.consultarTodosJogadores();
     }
-    async consultarJogadorPeloId(email) {
-        return await this.jogadoresService.consultarJogadorPeloEmail(email);
+    async consultarJogadorPeloId(_id) {
+        return await this.jogadoresService.consultarJogadorPeloId(_id);
     }
-    async deletarJogador(email) {
-        this.jogadoresService.deletarJogador(email);
+    async deletarJogador(_id) {
+        this.jogadoresService.deletarJogador(_id);
     }
 };
 __decorate([
@@ -41,7 +44,16 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [criar_jogador_dto_1.CriarJogadorDto]),
     __metadata("design:returntype", Promise)
-], JogadoresController.prototype, "criarAtualizarJogador", null);
+], JogadoresController.prototype, "criarJogador", null);
+__decorate([
+    Put('/:_id'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('_id', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [criar_jogador_dto_1.CriarJogadorDto, String]),
+    __metadata("design:returntype", Promise)
+], JogadoresController.prototype, "atualizarJogador", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
@@ -49,15 +61,15 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], JogadoresController.prototype, "consultarJogadores", null);
 __decorate([
-    (0, common_1.Get)(),
-    __param(0, (0, common_1.Query)('email', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),
+    (0, common_1.Get)('/:_id'),
+    __param(0, (0, common_1.Param)('_id', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], JogadoresController.prototype, "consultarJogadorPeloId", null);
 __decorate([
-    (0, common_1.Delete)(),
-    __param(0, (0, common_1.Query)('email', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),
+    (0, common_1.Delete)('/:_id'),
+    __param(0, (0, common_1.Param)('_id', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)

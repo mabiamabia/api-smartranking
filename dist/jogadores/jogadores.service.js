@@ -22,15 +22,21 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
         this.jogadorModel = jogadorModel;
         this.logger = new common_1.Logger(JogadoresService_1.name);
     }
-    async criarAtualizarJogador(criaJogadorDto) {
+    async criarJogador(criaJogadorDto) {
         const { email } = criaJogadorDto;
         const jogadorEncontrado = await this.jogadorModel.findOne({ email }).exec();
         if (jogadorEncontrado) {
-            await this.atualizar(criaJogadorDto);
+            throw new common_1.BadRequestException(`Jogador com ${email} já cadastrado`);
         }
-        else {
-            await this.criar(criaJogadorDto);
+        const jogadorCriado = new this.jogadorModel(criaJogadorDto);
+        return await jogadorCriado.save();
+    }
+    async atualizarJogador(_id, criarJogadorDto) {
+        const jogadorEncontrado = await this.jogadorModel.findOne({ _id }).exec();
+        if (!jogadorEncontrado) {
+            throw new common_1.NotFoundException(`Jogador com id ${_id} não encontrado`);
         }
+        await this.jogadorModel.findOneAndUpdate({ _id }, { $set: criarJogadorDto }).exec();
     }
     async consultarTodosJogadores() {
         return await this.jogadorModel.find().exec();
@@ -46,13 +52,6 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
     }
     async deletarJogador(email) {
         return await this.jogadorModel.deleteOne({ email }).exec();
-    }
-    async criar(criaJogadorDto) {
-        const jogadorCriado = new this.jogadorModel(criaJogadorDto);
-        return await jogadorCriado.save();
-    }
-    async atualizar(criarJogadorDto) {
-        return await this.jogadorModel.findOneAndUpdate({ email: criarJogadorDto.email }, { $set: criarJogadorDto }).exec();
     }
 };
 JogadoresService = JogadoresService_1 = __decorate([
