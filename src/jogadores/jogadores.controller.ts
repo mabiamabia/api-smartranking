@@ -18,14 +18,23 @@ export class JogadoresController {
     }
 
     @Get() 
-    async consultarJogadores(
-        @Query('email') email: string): Promise<Jogador[] | Jogador> {
-            if (email) {
-                return await this.jogadoresService.consultarJogadorPeloEmail(email);
-            } else {
-                return await this.jogadoresService.consultarTodosJogadores();
-            }
+    async consultarJogadores(): Promise<Jogador[]> {
+
+        return await this.jogadoresService.consultarTodosJogadores();
+
+        }
+
+    /* Replica */
+    @Get() 
+    async consultarJogadorPeloId(
+        @Query('email', JogadoresValidacaoParametrosPipe) email: string): Promise<Jogador[] | Jogador> {
+            
+            return await this.jogadoresService.consultarJogadorPeloEmail(email);
     }
+
+
+
+
 
     @Delete()
     async deletarJogador(

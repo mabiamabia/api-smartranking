@@ -4,7 +4,7 @@ exports.JogadoresValidacaoParametrosPipe = void 0;
 const common_1 = require("@nestjs/common");
 class JogadoresValidacaoParametrosPipe {
     transform(value, metadata) {
-        if (value) {
+        if (!value) {
             throw new common_1.BadRequestException(`O valor do parametro ${metadata.data} deve ser informado`);
         }
         return value;

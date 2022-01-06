@@ -24,13 +24,11 @@ let JogadoresController = class JogadoresController {
     async criarAtualizarJogador(criaJogadorDto) {
         await this.jogadoresService.criarAtualizarJogador(criaJogadorDto);
     }
-    async consultarJogadores(email) {
-        if (email) {
-            return await this.jogadoresService.consultarJogadorPeloEmail(email);
-        }
-        else {
-            return await this.jogadoresService.consultarTodosJogadores();
-        }
+    async consultarJogadores() {
+        return await this.jogadoresService.consultarTodosJogadores();
+    }
+    async consultarJogadorPeloId(email) {
+        return await this.jogadoresService.consultarJogadorPeloEmail(email);
     }
     async deletarJogador(email) {
         this.jogadoresService.deletarJogador(email);
@@ -46,11 +44,17 @@ __decorate([
 ], JogadoresController.prototype, "criarAtualizarJogador", null);
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Query)('email')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], JogadoresController.prototype, "consultarJogadores", null);
+__decorate([
+    (0, common_1.Get)(),
+    __param(0, (0, common_1.Query)('email', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], JogadoresController.prototype, "consultarJogadores", null);
+], JogadoresController.prototype, "consultarJogadorPeloId", null);
 __decorate([
     (0, common_1.Delete)(),
     __param(0, (0, common_1.Query)('email', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),
