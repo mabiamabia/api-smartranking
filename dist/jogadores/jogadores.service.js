@@ -45,7 +45,7 @@ let JogadoresService = JogadoresService_1 = class JogadoresService {
         }
     }
     async deletarJogador(email) {
-        return await this.jogadorModel.remove({ email }).exec();
+        return await this.jogadorModel.deleteOne({ email }).exec();
     }
     async criar(criaJogadorDto) {
         const jogadorCriado = new this.jogadorModel(criaJogadorDto);
