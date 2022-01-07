@@ -23,6 +23,9 @@ let CategoriasController = class CategoriasController {
     async criarCategoria(criarCategoriaDto) {
         return await this.categoriasService.criarCategoria(criarCategoriaDto);
     }
+    async consultarCategorias() {
+        return await this.categoriasService.consultarTodasCategorias();
+    }
 };
 __decorate([
     (0, common_1.Post)(),

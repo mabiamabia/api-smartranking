@@ -15,4 +15,8 @@ export class CategoriasController {
         @Body() criarCategoriaDto: CriarCategoriaDto): Promise<Categoria> {
             return await this.categoriasService.criarCategoria(criarCategoriaDto)
         }
+
+        async consultarCategorias(): Promise<Array<Categoria>> {
+            return await this.categoriasService.consultarTodasCategorias()
+        }
 }

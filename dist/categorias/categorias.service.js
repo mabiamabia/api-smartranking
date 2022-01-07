@@ -29,6 +29,9 @@ let CategoriasService = class CategoriasService {
         const categoriaCriada = new this.categoriaModel(criarCategoriaDto);
         return await categoriaCriada.save();
     }
+    async consultarTodasCategorias() {
+        return await this.categoriaModel.find().exec();
+    }
 };
 CategoriasService = __decorate([
     (0, common_1.Injectable)(),
