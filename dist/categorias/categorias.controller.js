@@ -26,6 +26,9 @@ let CategoriasController = class CategoriasController {
     async consultarCategorias() {
         return await this.categoriasService.consultarTodasCategorias();
     }
+    async consultarCategoriaPeloId(categoria) {
+        return await this.categoriasService.consultarCategoriaPeloId(categoria);
+    }
 };
 __decorate([
     (0, common_1.Post)(),
@@ -35,6 +38,19 @@ __decorate([
     __metadata("design:paramtypes", [criar_categoria_dto_1.CriarCategoriaDto]),
     __metadata("design:returntype", Promise)
 ], CategoriasController.prototype, "criarCategoria", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], CategoriasController.prototype, "consultarCategorias", null);
+__decorate([
+    (0, common_1.Get)('/:categoria'),
+    __param(0, (0, common_1.Param)('Categoria')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], CategoriasController.prototype, "consultarCategoriaPeloId", null);
 CategoriasController = __decorate([
     (0, common_1.Controller)('api/v1/categorias'),
     __metadata("design:paramtypes", [categorias_service_1.CategoriasService])

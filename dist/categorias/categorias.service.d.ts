@@ -6,4 +6,5 @@ export declare class CategoriasService {
     constructor(categoriaModel: Model<Categoria>);
     criarCategoria(criarCategoriaDto: CriarCategoriaDto): Promise<Categoria>;
     consultarTodasCategorias(): Promise<Array<Categoria>>;
+    consultarCategoriaPeloId(categoria: string): Promise<Categoria>;
 }

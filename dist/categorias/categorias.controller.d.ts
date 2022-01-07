@@ -6,4 +6,5 @@ export declare class CategoriasController {
     constructor(categoriasService: CategoriasService);
     criarCategoria(criarCategoriaDto: CriarCategoriaDto): Promise<Categoria>;
     consultarCategorias(): Promise<Array<Categoria>>;
+    consultarCategoriaPeloId(categoria: string): Promise<Categoria>;
 }

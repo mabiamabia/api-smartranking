@@ -32,6 +32,13 @@ let CategoriasService = class CategoriasService {
     async consultarTodasCategorias() {
         return await this.categoriaModel.find().exec();
     }
+    async consultarCategoriaPeloId(categoria) {
+        const categoriaEncontrada = await this.categoriaModel.findOne({ categoria }).exec();
+        if (!categoriaEncontrada) {
+            throw new common_1.NotFoundException(`Categoria ${categoria} não encontrada!`);
+        }
+        return categoriaEncontrada;
+    }
 };
 CategoriasService = __decorate([
     (0, common_1.Injectable)(),

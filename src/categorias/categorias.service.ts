@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prettier/prettier */
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CriarCategoriaDto } from './dtos/criar-categoria.dto';
@@ -26,5 +27,13 @@ export class CategoriasService {
 
     async consultarTodasCategorias(): Promise<Array<Categoria>> {
         return await this.categoriaModel.find().exec()
+    }
+
+    async consultarCategoriaPeloId(categoria: string): Promise<Categoria> {
+        const categoriaEncontrada = await this.categoriaModel.findOne({categoria}).exec()
+        if(!categoriaEncontrada) {
+            throw new NotFoundException(`Categoria ${categoria} não encontrada!`)
+        }
+        return categoriaEncontrada
     }
 }
