@@ -25,7 +25,7 @@ export class JogadoresService {
         return await jogadorCriado.save()
     }
 
-    /* Atualiza jogador */
+    /* Atualizar jogador */
     async atualizarJogador(_id: string, atualizarJogadorDto: AtualizarJogadorDto): Promise<void>{
 
         const jogadorEncontrado = await this.jogadorModel.findOne({_id}).exec();
