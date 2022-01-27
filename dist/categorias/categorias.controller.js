@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoriasController = void 0;
 const common_1 = require("@nestjs/common");
 const categorias_service_1 = require("./categorias.service");
+const atualizar_categoria_dto_1 = require("./dtos/atualizar-categoria.dto");
 const criar_categoria_dto_1 = require("./dtos/criar-categoria.dto");
 let CategoriasController = class CategoriasController {
     constructor(categoriasService) {
@@ -28,6 +29,12 @@ let CategoriasController = class CategoriasController {
     }
     async consultarCategoriaPeloId(categoria) {
         return await this.categoriasService.consultarCategoriaPeloId(categoria);
+    }
+    async atualizarCategoria(atualizarCategoriaDto, categoria) {
+        await this.categoriasService.atualizarCategoria(categoria, atualizarCategoriaDto);
+    }
+    async atribuirCategoriajogador(params) {
+        return await this.categoriasService.atribuirCategoriaJogador(params);
     }
 };
 __decorate([
@@ -51,6 +58,22 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], CategoriasController.prototype, "consultarCategoriaPeloId", null);
+__decorate([
+    (0, common_1.Put)('/:categoria'),
+    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('categoria')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [atualizar_categoria_dto_1.AtualizarCategoriaDto, String]),
+    __metadata("design:returntype", Promise)
+], CategoriasController.prototype, "atualizarCategoria", null);
+__decorate([
+    (0, common_1.Post)('/:categoria/jogadores/:idJogador'),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", Promise)
+], CategoriasController.prototype, "atribuirCategoriajogador", null);
 CategoriasController = __decorate([
     (0, common_1.Controller)('api/v1/categorias'),
     __metadata("design:paramtypes", [categorias_service_1.CategoriasService])

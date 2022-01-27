@@ -16,9 +16,11 @@ exports.CategoriasService = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
 const mongoose_2 = require("mongoose");
+const jogadores_service_1 = require("../jogadores/jogadores.service");
 let CategoriasService = class CategoriasService {
-    constructor(categoriaModel) {
+    constructor(categoriaModel, jogadoresService) {
         this.categoriaModel = categoriaModel;
+        this.jogadoresService = jogadoresService;
     }
     async criarCategoria(criarCategoriaDto) {
         const { categoria } = criarCategoriaDto;
@@ -30,7 +32,7 @@ let CategoriasService = class CategoriasService {
         return await categoriaCriada.save();
     }
     async consultarTodasCategorias() {
-        return await this.categoriaModel.find().exec();
+        return await this.categoriaModel.find().populate("jogadores").exec();
     }
     async consultarCategoriaPeloId(categoria) {
         const categoriaEncontrada = await this.categoriaModel.findOne({ categoria }).exec();
@@ -39,11 +41,34 @@ let CategoriasService = class CategoriasService {
         }
         return categoriaEncontrada;
     }
+    async atualizarCategoria(categoria, atualizarCategoriaDto) {
+        const categoriaEncontrada = await this.categoriaModel.findOne({ categoria }).exec();
+        if (!categoriaEncontrada) {
+            throw new common_1.NotFoundException(`Categoria ${categoria} não encontrada!`);
+        }
+        await this.categoriaModel.findOneAndUpdate({ categoria }, { $set: atualizarCategoriaDto }).exec();
+    }
+    async atribuirCategoriaJogador(params) {
+        const categoria = params['categoria'];
+        const idJogador = params['idJogador'];
+        const categoriaEncontrada = await this.categoriaModel.findOne({ categoria }).exec();
+        const jogadorJaCadastradoCategoria = await this.categoriaModel.find({ categoria }).where('jogadores').in(idJogador).exec();
+        await this.jogadoresService.consultarJogadorPeloId(idJogador);
+        if (!categoriaEncontrada) {
+            throw new common_1.BadRequestException(`Categoria ${categoria} não cadastrada!`);
+        }
+        if (jogadorJaCadastradoCategoria.length > 0) {
+            throw new common_1.BadRequestException(`Jogador ${idJogador} ja cadastrado na Categoria ${categoria}!`);
+        }
+        categoriaEncontrada.jogadores.push(idJogador);
+        await this.categoriaModel.findByIdAndUpdate({ categoria }, { $set: categoriaEncontrada }).exec();
+    }
 };
 CategoriasService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, mongoose_1.InjectModel)('Categoria')),
-    __metadata("design:paramtypes", [mongoose_2.Model])
+    __metadata("design:paramtypes", [mongoose_2.Model,
+        jogadores_service_1.JogadoresService])
 ], CategoriasService);
 exports.CategoriasService = CategoriasService;
 //# sourceMappingURL=categorias.service.js.map
