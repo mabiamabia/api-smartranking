@@ -20,7 +20,7 @@ let AllExceptionsFilter = AllExceptionsFilter_1 = class AllExceptionsFilter {
         const status = exception instanceof common_1.HttpException
             ? exception.getStatus()
             : common_1.HttpStatus.INTERNAL_SERVER_ERROR;
-        const message = exception instanceof common_1.HttpException ? exception.getResponse() : '';
+        const message = exception instanceof common_1.HttpException ? exception.getResponse() : exception;
         this.logger.error(`Http Status: ${status} Error Message: ${JSON.stringify(message)}`);
         response.status(status).json({
             timestamp: new Date().toISOString(),

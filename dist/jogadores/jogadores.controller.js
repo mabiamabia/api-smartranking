@@ -17,7 +17,7 @@ const common_1 = require("@nestjs/common");
 const criar_jogador_dto_1 = require("./dtos/criar-jogador.dto");
 const atualizar_jogador_dto_1 = require("./dtos/atualizar-jogador.dto");
 const jogadores_service_1 = require("./jogadores.service");
-const jogadores_validacao_parametros_pipe_1 = require("./pipes/jogadores-validacao-parametros.pipe");
+const validacao_parametros_pipe_1 = require("./pipes/validacao-parametros.pipe");
 let JogadoresController = class JogadoresController {
     constructor(jogadoresService) {
         this.jogadoresService = jogadoresService;
@@ -50,7 +50,7 @@ __decorate([
     (0, common_1.Put)('/:_id'),
     (0, common_1.UsePipes)(common_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
-    __param(1, (0, common_1.Param)('_id', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),
+    __param(1, (0, common_1.Param)('_id', validacao_parametros_pipe_1.ValidacaoParametrosPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [atualizar_jogador_dto_1.AtualizarJogadorDto, String]),
     __metadata("design:returntype", Promise)
@@ -63,14 +63,14 @@ __decorate([
 ], JogadoresController.prototype, "consultarJogadores", null);
 __decorate([
     (0, common_1.Get)('/:_id'),
-    __param(0, (0, common_1.Param)('_id', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),
+    __param(0, (0, common_1.Param)('_id', validacao_parametros_pipe_1.ValidacaoParametrosPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], JogadoresController.prototype, "consultarJogadorPeloId", null);
 __decorate([
     (0, common_1.Delete)('/:_id'),
-    __param(0, (0, common_1.Param)('_id', jogadores_validacao_parametros_pipe_1.JogadoresValidacaoParametrosPipe)),
+    __param(0, (0, common_1.Param)('_id', validacao_parametros_pipe_1.ValidacaoParametrosPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
