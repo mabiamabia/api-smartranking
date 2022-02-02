@@ -2,7 +2,6 @@
 /* eslint-disable prettier/prettier */
 import { Document } from 'mongoose'
 import { Jogador } from 'src/jogadores/interfaces/jogador.interface'
-//estrutura padrao nest controller
 import { DesafioStatus } from './desafio-status.enum'
 
 export interface Desafio extends Document {
